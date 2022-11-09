@@ -1,27 +1,41 @@
 <div class="h-100 p-3 bg-light border rounded-3 my-3 shadow">
   <div class= "">
     <h2><%=  @restaurant.name %></h2>
-    <p> Rating    
-      <% if @restaurant.reviews.count > 1 %>
-        <%= @restaurant.reviews.sum(:rating) / @restaurant.reviews.count %>
-      <% else %>
-        <%= @restaurant.reviews.sum(:rating)  %>
+    <!-- Font Awesome needed -->
+    <div class="d-flex m-2">
+      <% @restaurant.reviews.sum(:rating).times do %>
+        <i class="fas fa-star"></i>
       <% end %>
-    </p>
-    <p>Details: <%= @restaurant.address %></p>
-    <p>category: <%= @restaurant.phone_number %></p>
-    <p>category: <%= @restaurant.category %></p>
-    <%= link_to "create review", new_restaurant_review_path(@restaurant), class:  "btn btn-success"%>
-  </div >
-  <h3>Reviews</h3>
-  <% @restaurant.reviews.each do |review| %>
-    <%= link_to review_path(review) ,data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-      <i class="fa-solid fa-trash-can"></i>
-    <% end %>
-    <div class="h-100 p-3  border rounded-3 my-3 shadow-sm" style="--bs-bg-opacity: .5">
-      <p> <%= review.content %> </p>
+      <% (5 - @restaurant.reviews.sum(:rating)).times do %>
+        <i class="far fa-star"></i>
+      <% end %>
     </div>
-  <% end %>
-  <div style= "width:200px" class="d-flex justify-content-around align-items-center">
-    <%= link_to "Home", root_path, class: "btn btn-secondary"   %>
+    <p class= "m-3"><i class="fa-solid fa-location-dot"></i> <%= @restaurant.address %></p>
+    <p class= "m-3"><i class="fa-solid fa-phone"></i> <%= @restaurant.phone_number %></p>
+    <p class= "m-3"><i class="fa-solid fa-utensils"></i> <%= @restaurant.category.capitalize %></p>
+  </div >
+  <h3>Reviews  <%= link_to  new_restaurant_review_path(@restaurant), class:  "btn-success btn-sm" do %>
+      <i class="fa-solid fa-circle-plus"></i>
+    <% end %>
+  </h3>
+  <div class="h-100 p-1 border rounded-3 my-3 shadow-sm" style="--bs-bg-opacity: .5">
+    <% @restaurant.reviews.each do |review| %>
+      <div class="h-100 p-3 bg-light border rounded-3 my-3 shadow">
+        <div class= "d-flex">
+          <div class= "flex-grow-1 border-end">
+            <p> <%= review.content %> </p>
+          </div>
+          <div>
+            <%= link_to review_path(review) ,data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+              <i class="fa-solid fa-trash-can"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
+</div>
+</div>
+<div style= "width:200px" class="d-flex justify-content-around align-items-center">
+  <%= link_to "Home", root_path, class: "btn btn-secondary"   %>
+</div>
