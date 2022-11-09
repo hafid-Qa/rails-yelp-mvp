@@ -14,7 +14,7 @@ puts 'strarting creation'
     name: Faker::Restaurant.name,
     address: Faker::Address.street_address,
     phone_number: Faker::PhoneNumber.phone_number,
-    category: Faker::Restaurant.type
+    category: Restaurant::CATEGORIES.sample
   )
   puts "restaurant id #{restaurant.id}"
   review = Review.new(content: Faker::Restaurant.review,
