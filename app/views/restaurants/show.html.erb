@@ -4,7 +4,7 @@
     <!-- Font Awesome needed -->
     <div class="d-flex m-2">
       <% @restaurant.reviews.sum(:rating).times do %>
-        <i class="fas fa-star"></i>
+        <i class="fas fa-star star color" ></i>
       <% end %>
       <% (5 - @restaurant.reviews.sum(:rating)).times do %>
         <i class="far fa-star"></i>
@@ -19,19 +19,23 @@
     <% end %>
   </h3>
   <div class="h-100 p-1 border rounded-3 my-3 shadow-sm" style="--bs-bg-opacity: .5">
-    <% @restaurant.reviews.each do |review| %>
-      <div class="h-100 p-3 bg-light border rounded-3 my-3 shadow">
-        <div class= "d-flex">
-          <div class= "flex-grow-1 border-end">
-            <p> <%= review.content %> </p>
-          </div>
-          <div>
-            <%= link_to review_path(review) ,data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-              <i class="fa-solid fa-trash-can"></i>
-            <% end %>
+    <% if @restaurant.reviews.any? %>
+      <% @restaurant.reviews.each do |review| %>
+        <div class="h-100 p-3 bg-light border rounded-3 my-3 shadow">
+          <div class= "d-flex">
+            <div class= "flex-grow-1 border-end">
+              <p> <%= review.content %> </p>
+            </div>
+            <div>
+              <%= link_to review_path(review) ,data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                <i class="fa-solid fa-trash-can"></i>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
+    <% else %>
+      <p>No Reviews</p>
     <% end %>
   </div>
 </div>
