@@ -4,7 +4,8 @@
     <%= link_to root_path, class: "navbar-brand" do %>
       <h1 class="title"> Yelp </h1>
     <% end %>
-    <button
+    <%= link_to "Create New restaurant", new_restaurant_path, class: "btn btn-ghost" %>
+    <%# <button
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
@@ -13,7 +14,7 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <span class="navbar-toggler-icon"> Create new </span>
+    </button> %>
   </div>
 </nav>

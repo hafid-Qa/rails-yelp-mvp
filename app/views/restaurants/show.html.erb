@@ -1,0 +1,11 @@
+<div class="h-100 p-3 bg-light border rounded-3 my-3 shadow d-flex justify-content-between">
+  <div class= "">
+    <h2><%=  @restaurant.name %></h2>
+    <p>Details: <%= @restaurant.address %></p>
+    <p>category: <%= @restaurant.phone_number %></p>
+    <p>category: <%= @restaurant.category %></p>
+  </div >
+</div>
+<div style= "width:200px" class="d-flex justify-content-around align-items-center">
+  <%= link_to "Home", root_path, class: "btn btn-secondary"   %>
+</div>
